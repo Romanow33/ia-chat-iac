@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  ensure-model:
+    image: curlimages/curl:8.10.1
+    env_file:
+      - .env
+    volumes:
+      - ./scripts:/scripts:ro
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    entrypoint: ["/bin/sh","-lc","/scripts/ensure_model.sh"]
+
+  app:
+    build:
+      context: ../app
+      dockerfile: Dockerfile
+    container_name: ai-fn
+    ports:
+      - "9000:8000"
+    env_file:
+      - .env
+    depends_on:
+      ensure-model:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8000/healthz || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
