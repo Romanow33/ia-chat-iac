@@ -113,18 +113,6 @@ uvicorn app.main:app --reload --port 8000
 
 ---
 
-## 🧩 Troubleshooting
-
-- **Ollama no responde**  
-  Asegurate de que `ollama serve` esté corriendo en el host.
-
-- **Modelo no encontrado**  
-  Actualiza `.env` con el nombre exacto que aparece en `ollama list`.
-
-- **Problemas en Windows con CRLF**  
-  Guarda `.env` y scripts en formato LF.
-
----
 
 ## 📌 Próximos pasos
 - Agregar métricas (Prometheus/Grafana)
