@@ -111,13 +111,6 @@ Correr FastAPI local:
 uvicorn app.main:app --reload --port 8000
 ```
 
----
-
-
-## 📌 Próximos pasos
-- Agregar métricas (Prometheus/Grafana)
-- Montar despliegue en Kubernetes (kind/minikube)
-- Extender a OKD/OpenShift
 
 ---
 
